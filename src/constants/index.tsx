@@ -1,7 +1,9 @@
 import {
+  DollarSign,
   Globe,
   Leaf,
   MapPin,
+  MessageCircle,
   Shield,
   Smartphone,
   Star,
@@ -258,5 +260,66 @@ export const products = [
     discount: 6,
     description: "Fresh Hilsa fish caught from Padma river",
     farmDistance: "60 km away",
+  },
+];
+
+export const testimonials = [
+  {
+    name: "Abdul Rahman",
+    location: "Jessore",
+    image: "",
+    rating: 5,
+    text: "AgroConnect changed my life! I now sell directly to customers in Dhaka and earn 3x more than selling to local traders.",
+    revenue: "৳45,000/month",
+    crop: "Organic Vegetables",
+  },
+  {
+    name: "Fatima Khatun",
+    location: "Rangpur",
+    image: "",
+    rating: 5,
+    text: "The platform is so easy to use. I can manage my orders from my phone while working in the field.",
+    revenue: "৳32,000/month",
+    crop: "Rice & Grains",
+  },
+  {
+    name: "Mohammad Ali",
+    location: "Rajshahi",
+    image: "",
+    rating: 5,
+    text: "Best decision I made for my farm. The analytics help me understand what customers want most.",
+    revenue: "৳58,000/month",
+    crop: "Fruits & Mangoes",
+  },
+];
+
+export const steps = [
+  {
+    step: "01",
+    title: "Create Your Profile",
+    description:
+      "Sign up and create your farmer profile with farm details and certifications.",
+    icon: <Users className="w-6 h-6" />,
+  },
+  {
+    step: "02",
+    title: "List Your Products",
+    description:
+      "Add your products with photos, descriptions, and pricing. Set your availability.",
+    icon: <Leaf className="w-6 h-6" />,
+  },
+  {
+    step: "03",
+    title: "Receive Orders",
+    description:
+      "Get notified when customers place orders. Accept or decline based on your capacity.",
+    icon: <MessageCircle className="w-6 h-6" />,
+  },
+  {
+    step: "04",
+    title: "Get Paid",
+    description:
+      "Deliver your products and receive instant payments through our secure system.",
+    icon: <DollarSign className="w-6 h-6" />,
   },
 ];
