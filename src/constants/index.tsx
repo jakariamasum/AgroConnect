@@ -1,9 +1,14 @@
 import {
+  Clock,
   DollarSign,
   Globe,
+  Handshake,
+  Heart,
   Leaf,
+  Mail,
   MapPin,
   MessageCircle,
+  Phone,
   Shield,
   Smartphone,
   Star,
@@ -322,4 +327,201 @@ export const steps = [
       "Deliver your products and receive instant payments through our secure system.",
     icon: <DollarSign className="w-6 h-6" />,
   },
+];
+
+export const values = [
+  {
+    icon: <Leaf className="w-8 h-8 text-green-600" />,
+    title: "Sustainability",
+    description:
+      "We promote sustainable farming practices and environmental responsibility in everything we do.",
+  },
+  {
+    icon: <Handshake className="w-8 h-8 text-blue-600" />,
+    title: "Fair Trade",
+    description:
+      "Ensuring fair prices for farmers and affordable access to fresh produce for everyone.",
+  },
+  {
+    icon: <Shield className="w-8 h-8 text-purple-600" />,
+    title: "Quality First",
+    description:
+      "We maintain the highest standards of quality and freshness in all our products.",
+  },
+  {
+    icon: <Heart className="w-8 h-8 text-red-600" />,
+    title: "Community",
+    description:
+      "Building strong relationships between farmers and consumers across Bangladesh.",
+  },
+];
+
+export const team = [
+  {
+    name: "Rashid Ahmed",
+    role: "Founder & CEO",
+    image: "",
+    bio: "Former agricultural engineer with 15+ years experience in sustainable farming.",
+    linkedin: "#",
+  },
+  {
+    name: "Fatima Rahman",
+    role: "Head of Operations",
+    image: "",
+    bio: "Supply chain expert ensuring seamless delivery from farm to table.",
+    linkedin: "#",
+  },
+  {
+    name: "Mohammad Karim",
+    role: "Technology Director",
+    image: "",
+    bio: "Tech innovator building the future of agricultural commerce.",
+    linkedin: "#",
+  },
+  {
+    name: "Nasreen Sultana",
+    role: "Farmer Relations",
+    image: "",
+    bio: "Dedicated to empowering farmers and improving their livelihoods.",
+    linkedin: "#",
+  },
+];
+
+export const milestones = [
+  {
+    year: "2020",
+    title: "Company Founded",
+    description:
+      "Started with a vision to connect farmers directly with consumers",
+  },
+  {
+    year: "2021",
+    title: "First 1,000 Farmers",
+    description: "Reached our first milestone of 1,000 registered farmers",
+  },
+  {
+    year: "2022",
+    title: "Mobile App Launch",
+    description: "Launched our mobile app making shopping even more convenient",
+  },
+  {
+    year: "2023",
+    title: "50,000 Customers",
+    description: "Celebrated serving 50,000+ happy customers across Bangladesh",
+  },
+  {
+    year: "2024",
+    title: "Nationwide Coverage",
+    description: "Expanded to cover all 64 districts of Bangladesh",
+  },
+];
+
+export const contactInfo = [
+  {
+    icon: <MapPin className="w-6 h-6 text-green-600" />,
+    title: "Head Office",
+    details: ["House 123, Road 15", "Dhanmondi, Dhaka 1209", "Bangladesh"],
+    action: "Get Directions",
+  },
+  {
+    icon: <Phone className="w-6 h-6 text-blue-600" />,
+    title: "Phone Numbers",
+    details: [
+      "+880 1700-123456",
+      "+880 2-9876543",
+      "Emergency: +880 1800-AGRO",
+    ],
+    action: "Call Now",
+  },
+  {
+    icon: <Mail className="w-6 h-6 text-purple-600" />,
+    title: "Email Addresses",
+    details: [
+      "info@agroconnect.bd",
+      "support@agroconnect.bd",
+      "farmers@agroconnect.bd",
+    ],
+    action: "Send Email",
+  },
+  {
+    icon: <Clock className="w-6 h-6 text-orange-600" />,
+    title: "Business Hours",
+    details: [
+      "Monday - Friday: 9:00 AM - 6:00 PM",
+      "Saturday: 10:00 AM - 4:00 PM",
+      "Sunday: Closed",
+    ],
+    action: "View Schedule",
+  },
+];
+
+export const departments = [
+  {
+    name: "General Inquiry",
+    description: "General questions about our services",
+    email: "info@agroconnect.bd",
+    phone: "+880 1700-123456",
+  },
+  {
+    name: "Farmer Support",
+    description: "Help for farmers using our platform",
+    email: "farmers@agroconnect.bd",
+    phone: "+880 1700-123457",
+  },
+  {
+    name: "Customer Support",
+    description: "Support for buyers and customers",
+    email: "support@agroconnect.bd",
+    phone: "+880 1700-123458",
+  },
+  {
+    name: "Technical Support",
+    description: "Technical issues and app support",
+    email: "tech@agroconnect.bd",
+    phone: "+880 1700-123459",
+  },
+  {
+    name: "Business Partnership",
+    description: "Partnership and collaboration opportunities",
+    email: "partners@agroconnect.bd",
+    phone: "+880 1700-123460",
+  },
+  {
+    name: "Media & Press",
+    description: "Media inquiries and press relations",
+    email: "media@agroconnect.bd",
+    phone: "+880 1700-123461",
+  },
+];
+
+export const faqs = [
+  {
+    question: "How do I register as a farmer?",
+    answer:
+      "Visit our 'For Farmers' page and click 'Start Selling Today'. Fill out the registration form with your farm details and wait for verification.",
+  },
+  {
+    question: "What are the delivery charges?",
+    answer:
+      "Delivery is free for orders above ৳500. For orders below ৳500, delivery charges range from ৳30-80 depending on location.",
+  },
+  {
+    question: "How do I track my order?",
+    answer:
+      "Once your order is confirmed, you'll receive a tracking link via SMS and email. You can also track orders in your account dashboard.",
+  },
+  {
+    question: "What is your return policy?",
+    answer:
+      "We offer 100% satisfaction guarantee. If you're not satisfied with the quality, contact us within 24 hours for a full refund or replacement.",
+  },
+];
+
+export const inquiryOptions = [
+  { value: "general", label: "General Inquiry" },
+  { value: "farmer", label: "Farmer Support" },
+  { value: "customer", label: "Customer Support" },
+  { value: "technical", label: "Technical Support" },
+  { value: "partnership", label: "Partnership" },
+  { value: "media", label: "Media & Press" },
 ];

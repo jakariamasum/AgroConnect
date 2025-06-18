@@ -83,6 +83,18 @@ export function Header({ user }: HeaderProps) {
             >
               For Buyers
             </Link>
+            <Link
+              href="/about"
+              className="text-gray-600 hover:text-green-600 transition-colors"
+            >
+              About
+            </Link>
+            <Link
+              href="/contact"
+              className="text-gray-600 hover:text-green-600 transition-colors"
+            >
+              Contact
+            </Link>
           </nav>
 
           <div className="flex items-center space-x-3">
@@ -188,6 +200,18 @@ export function Header({ user }: HeaderProps) {
                 className="text-gray-600 hover:text-green-600"
               >
                 For Buyers
+              </Link>
+              <Link
+                href="/about"
+                className="text-gray-600 hover:text-green-600 transition-colors"
+              >
+                About
+              </Link>
+              <Link
+                href="/contact"
+                className="text-gray-600 hover:text-green-600 transition-colors"
+              >
+                Contact
               </Link>
 
               {!user && (

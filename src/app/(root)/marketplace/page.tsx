@@ -61,7 +61,7 @@ const MarketplacePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-gray-100">
-      <div className="container mx-auto px-4 py-10">
+      <div className="container mx-auto px-4 py-10 ">
         <TopHero
           title1="Fresh Produce"
           title2="Marketplace"
