@@ -13,12 +13,13 @@ interface CheckboxProps {
   id?: string;
   disabled?: boolean;
   size?: "sm" | "md" | "lg";
+  children?: React.ReactNode;
 }
 
 const sizeMap = {
-  sm: "w-4 h-4", // 16px
-  md: "w-6 h-6", // 24px
-  lg: "w-8 h-8", // 32px
+  sm: "w-4 h-4",
+  md: "w-6 h-6",
+  lg: "w-8 h-8",
 };
 
 const iconSizeMap = {
@@ -27,12 +28,13 @@ const iconSizeMap = {
   lg: "w-5 h-5",
 };
 
-const Checkbox = ({
+const AgroCheckbox = ({
   name,
   className,
   id,
   disabled,
   size = "sm",
+  children,
 }: CheckboxProps) => {
   const {
     register,
@@ -58,7 +60,7 @@ const Checkbox = ({
   };
 
   return (
-    <div className="flex flex-col items-start gap-1">
+    <div className="flex items-center gap-2">
       <motion.button
         type="button"
         id={id}
@@ -67,7 +69,7 @@ const Checkbox = ({
         tabIndex={0}
         whileTap={{ scale: disabled ? 1 : 0.9 }}
         className={cn(
-          "border-2 border-gray-300 rounded flex items-center justify-center transition-all duration-200 outline-none",
+          "border-2 border-gray-300 rounded flex items-center justify-center transition-all duration-200 outline-none shrink-0",
           sizeMap[size],
           checked && "bg-green-600 border-green-600",
           disabled && "opacity-50 cursor-not-allowed",
@@ -77,9 +79,7 @@ const Checkbox = ({
         )}
         disabled={disabled}
       >
-        {/* hidden input for RHF */}
         <input type="hidden" {...register(name)} />
-
         <AnimatePresence>
           {checked && (
             <motion.div
@@ -94,11 +94,29 @@ const Checkbox = ({
         </AnimatePresence>
       </motion.button>
 
+      {children && (
+        <label
+          htmlFor={id}
+          className={cn(
+            "text-sm leading-snug select-none",
+            disabled && "opacity-60 cursor-not-allowed"
+          )}
+          onClick={(e) => {
+            e.preventDefault();
+            handleChange();
+          }}
+        >
+          {children}
+        </label>
+      )}
+
       {errors[name] && (
-        <p className="text-sm text-red-600">{(errors[name] as any).message}</p>
+        <p className="text-sm text-red-600 mt-1">
+          {(errors[name] as any).message}
+        </p>
       )}
     </div>
   );
 };
 
-export default Checkbox;
+export default AgroCheckbox;

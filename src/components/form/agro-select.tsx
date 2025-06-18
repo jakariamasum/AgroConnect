@@ -11,6 +11,7 @@ interface AgroSelectOption {
   value: string;
   label: string;
   disabled?: boolean;
+  count?: number; // Optional count for displaying in the dropdown
 }
 
 interface AgroSelectProps {
@@ -93,12 +94,24 @@ const AgroSelect = ({
         <div className="flex items-center justify-between">
           <span
             className={cn(
-              "truncate text-gray-800",
+              "flex items-center gap-2 text-gray-800",
               !selectedOption && "text-gray-400 italic font-light"
             )}
           >
-            {selectedOption ? selectedOption.label : placeholder}
+            {selectedOption ? (
+              <>
+                <span className="truncate">{selectedOption.label}</span>
+                {selectedOption.count !== undefined && (
+                  <span className="text-gray-500 font-normal">
+                    ({selectedOption.count})
+                  </span>
+                )}
+              </>
+            ) : (
+              placeholder
+            )}
           </span>
+
           <motion.div
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
