@@ -67,3 +67,15 @@ export const CardTitle = ({
     </h3>
   );
 };
+
+export const CardDescription = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <p className={cn("text-sm text-gray-500 mt-1", className)}>{children}</p>
+  );
+};
