@@ -13,7 +13,15 @@ import {
   Smartphone,
   Star,
   TrendingUp,
+  Home,
+  Package,
+  ShoppingCart,
+  BarChart3,
   Users,
+  FileText,
+  Settings,
+  Truck,
+  PlusCircle,
 } from "lucide-react";
 
 export const stats = [
@@ -539,4 +547,86 @@ export const businessTypeOptions = [
   { value: "retailer", label: "Retailer" },
   { value: "wholesaler", label: "Wholesaler" },
   { value: "cooperative", label: "Cooperative" },
+];
+
+export const farmerSidebar = [
+  {
+    name: "dashboard",
+    href: "/farmers/dashboard",
+    icon: Home,
+    label: "Dashboard",
+  },
+  {
+    name: "products",
+    href: "/farmers/products",
+    icon: Package,
+    label: "My Products",
+  },
+  {
+    name: "add-product",
+    href: "/farmers/products/new",
+    icon: PlusCircle,
+    label: "Add Product",
+  },
+  {
+    name: "orders",
+    href: "/farmers/orders",
+    icon: ShoppingCart,
+    label: "Orders",
+  },
+  {
+    name: "deliveries",
+    href: "/farmers/deliveries",
+    icon: Truck,
+    label: "Deliveries",
+  },
+  {
+    name: "analytics",
+    href: "/farmers/analytics",
+    icon: BarChart3,
+    label: "Analytics",
+  },
+  {
+    name: "messages",
+    href: "/farmers/messages",
+    icon: MessageCircle,
+    label: "Messages",
+  },
+  {
+    name: "market",
+    href: "/farmers/market",
+    icon: Leaf,
+    label: "Marketplace",
+  },
+  {
+    name: "reports",
+    icon: FileText,
+    label: "Reports",
+    children: [
+      {
+        name: "sales",
+        href: "/farmers/reports/sales",
+        icon: FileText,
+        label: "Sales Report",
+      },
+      {
+        name: "inventory",
+        href: "/farmers/reports/inventory",
+        icon: FileText,
+        label: "Inventory Report",
+      },
+    ],
+  },
+  {
+    name: "profile",
+    href: "/farmers/profile",
+    icon: Users,
+    label: "Profile",
+  },
+  {
+    name: "settings",
+    href: "/farmers/settings",
+    icon: Settings,
+    label: "Settings",
+  },
 ];

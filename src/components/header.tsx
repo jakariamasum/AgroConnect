@@ -72,13 +72,13 @@ export function Header({ user }: HeaderProps) {
               Marketplace
             </Link>
             <Link
-              href="/farmers"
+              href="/for-farmers"
               className="text-gray-600 hover:text-green-600 transition-colors"
             >
               For Farmers
             </Link>
             <Link
-              href="/buyers"
+              href="/for-buyers"
               className="text-gray-600 hover:text-green-600 transition-colors"
             >
               For Buyers
@@ -190,13 +190,13 @@ export function Header({ user }: HeaderProps) {
                 Marketplace
               </Link>
               <Link
-                href="/farmers"
+                href="/for-farmers"
                 className="text-gray-600 hover:text-green-600"
               >
                 For Farmers
               </Link>
               <Link
-                href="/buyers"
+                href="/for-buyers"
                 className="text-gray-600 hover:text-green-600"
               >
                 For Buyers
