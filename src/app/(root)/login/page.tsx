@@ -16,10 +16,33 @@ import { Leaf, Mail, UserLock } from "lucide-react";
 import AgroForm from "@/components/form/agro-form";
 import AgroInput from "@/components/form/agro-input";
 import AgroCheckbox from "@/components/form/agro-checkbox";
+import { useAppDispatch } from "@/redux/hooks";
+import { useLoginMutation } from "@/redux/features/auth/authApi";
+import { token_helper } from "@/utils/token_helper";
+import { setCredentials } from "@/redux/features/auth/authSlice";
+import { TUser } from "@/types/auth.types";
+import { toast } from "sonner";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "@/schemas/auth.schema";
 
 const Login = () => {
-  const handleSubmit = (data: any) => {
-    console.log("Login data:", data);
+  const dispatch = useAppDispatch();
+  const [login] = useLoginMutation();
+  const handleSubmit = async (data: any) => {
+    const response = await login(data).unwrap();
+    if (response.success) {
+      const verifyToken = token_helper.verifyToken(response.data?.token);
+      dispatch(
+        setCredentials({
+          user: verifyToken as TUser,
+          token: response.data?.token,
+        })
+      );
+      toast.success(response.message);
+      window.location.href = response.data.redirectUrl;
+    } else {
+      toast.error(response.message);
+    }
   };
 
   return (
@@ -52,7 +75,10 @@ const Login = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <AgroForm onSubmit={handleSubmit}>
+              <AgroForm
+                onSubmit={handleSubmit}
+                resolver={zodResolver(loginSchema)}
+              >
                 <AgroInput
                   name="email"
                   type="email"

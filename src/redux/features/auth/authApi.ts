@@ -17,9 +17,12 @@ interface RegisterRequest {
 }
 
 interface LoginResponse {
-  user: TUser;
-  token: string;
-  refreshToken: string;
+  success: boolean;
+  message: string;
+  data: {
+    redirectUrl: string;
+    token: string;
+  };
 }
 
 export const authApi = createApi({
@@ -36,7 +39,7 @@ export const authApi = createApi({
   }),
   tagTypes: ["User"],
   endpoints: (builder) => ({
-    login: builder.mutation<ApiResponse<LoginResponse>, LoginRequest>({
+    login: builder.mutation<ApiResponse<any>, LoginRequest>({
       query: (credentials) => ({
         url: "/login",
         method: "POST",
@@ -56,16 +59,7 @@ export const authApi = createApi({
         method: "POST",
       }),
     }),
-    refreshToken: builder.mutation<
-      ApiResponse<{ token: string }>,
-      { refreshToken: string }
-    >({
-      query: ({ refreshToken }) => ({
-        url: "/refresh",
-        method: "POST",
-        body: { refreshToken },
-      }),
-    }),
+
     getProfile: builder.query<ApiResponse<TUser>, void>({
       query: () => "/profile",
       providesTags: ["User"],
@@ -119,7 +113,6 @@ export const {
   useLoginMutation,
   useRegisterMutation,
   useLogoutMutation,
-  useRefreshTokenMutation,
   useGetProfileQuery,
   useUpdateProfileMutation,
   useChangePasswordMutation,

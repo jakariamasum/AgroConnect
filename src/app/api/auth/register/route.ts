@@ -65,7 +65,12 @@ export async function POST(request: Request) {
       },
     });
 
-    const token = token_helper.generateToken(user.id, user.role);
+    const token = token_helper.generateToken({
+      id: user.id,
+      email: user.email,
+      role: user.role,
+      name: user.name,
+    });
     const response: ApiResponse<string> = {
       success: true,
       message: "User registered successfully",

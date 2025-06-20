@@ -4,7 +4,6 @@ import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 interface AuthState {
   user: TUser | null;
   token: string | null;
-  refreshToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   error: string | null;
@@ -13,7 +12,6 @@ interface AuthState {
 const initialState: AuthState = {
   user: null,
   token: null,
-  refreshToken: null,
   isAuthenticated: false,
   isLoading: false,
   error: null,
@@ -28,12 +26,10 @@ const authSlice = createSlice({
       action: PayloadAction<{
         user: TUser;
         token: string;
-        refreshToken: string;
       }>
     ) => {
       state.user = action.payload.user;
       state.token = action.payload.token;
-      state.refreshToken = action.payload.refreshToken;
       state.isAuthenticated = true;
       state.error = null;
     },
@@ -46,7 +42,6 @@ const authSlice = createSlice({
     clearCredentials: (state) => {
       state.user = null;
       state.token = null;
-      state.refreshToken = null;
       state.isAuthenticated = false;
       state.error = null;
     },
