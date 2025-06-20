@@ -29,12 +29,26 @@ import { businessTypeOptions, experienceOptions, locations } from "@/constants";
 import AgroCheckbox from "@/components/form/agro-checkbox";
 import AgroTextarea from "@/components/form/agro-textarea";
 import Label from "@/components/ui/label";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { registerSchema } from "@/schemas/auth.schema";
+import { useRegisterMutation } from "@/redux/features/auth/authApi";
+import { toast } from "sonner";
+import SyncRole from "@/components/sync-role";
 
 const Register = () => {
   const [userType, setUserType] = useState<"farmer" | "buyer">("farmer");
+  const [register] = useRegisterMutation();
 
-  const handleSubmit = (data: any) => {
+  const handleSubmit = async (data: any) => {
     console.log("Registration data:", data);
+    const res = await register(data).unwrap();
+    console.log("Registration response:", res);
+    if (res.success) {
+      toast.success(res.message);
+      window.location.href = "/login";
+    } else {
+      toast.error(res.message);
+    }
   };
 
   return (
@@ -127,7 +141,11 @@ const Register = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <AgroForm onSubmit={handleSubmit}>
+              <AgroForm
+                onSubmit={handleSubmit}
+                resolver={zodResolver(registerSchema)}
+              >
+                <SyncRole userType={userType} />
                 {/* Basic Information */}
                 <div className="grid md:grid-cols-2 gap-4">
                   <AgroInput
@@ -135,12 +153,14 @@ const Register = () => {
                     placeholder="John Doe"
                     name="name"
                     icon={<User2Icon />}
+                    required
                   />
                   <AgroInput
                     label="Phone Number"
                     placeholder="8801xxxxxx"
                     name="phone"
                     icon={<Phone />}
+                    required={false}
                   />
                 </div>
                 <AgroInput
@@ -148,6 +168,7 @@ const Register = () => {
                   placeholder="john@doe"
                   name="email"
                   icon={<Mail />}
+                  required
                 />
 
                 <div className="grid md:grid-cols-2 gap-4">
@@ -157,13 +178,15 @@ const Register = () => {
                     placeholder="****"
                     name="password"
                     icon={<UserLock />}
+                    required
                   />
                   <AgroInput
                     type="password"
                     label="Confirm Password"
                     placeholder="****"
-                    name="confirmCassword"
+                    name="confirmPassword"
                     icon={<UserLock />}
+                    required
                   />
                 </div>
                 <div>
@@ -181,6 +204,7 @@ const Register = () => {
                           label="Farm Size (in acres)"
                           placeholder="e.g., 5 acres"
                           name="farmSize"
+                          type="number"
                           icon={<UserLock />}
                         />
                       </div>
@@ -202,7 +226,7 @@ const Register = () => {
                 {/* Buyer-specific fields */}
                 {userType === "buyer" && (
                   <div>
-                    <Label label="Business Type" />
+                    <Label label="Business Type" required={false} />
                     <AgroSelect
                       name="businessType"
                       options={businessTypeOptions}

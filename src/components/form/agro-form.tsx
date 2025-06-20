@@ -6,10 +6,12 @@ import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 interface IFormConfig {
   defaultValues?: Record<string, any>;
   resolver?: any;
+  mode?: "onChange" | "onBlur" | "onSubmit" | "all";
 }
 interface Props extends IFormConfig {
   children: ReactNode;
   onSubmit: SubmitHandler<any>;
+  mode?: "onChange" | "onBlur" | "onSubmit" | "all";
 }
 
 const AgroForm = ({ children, resolver, defaultValues, onSubmit }: Props) => {
@@ -21,6 +23,8 @@ const AgroForm = ({ children, resolver, defaultValues, onSubmit }: Props) => {
   if (!!resolver) {
     formConfig["resolver"] = resolver;
   }
+  formConfig["mode"] = "onChange";
+
   const methods = useForm(formConfig);
 
   const submitHandler = methods.handleSubmit;

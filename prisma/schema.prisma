@@ -96,6 +96,7 @@ model FarmerProfile {
   businessLicense   String?
   taxId             String?
   bankAccount       String?
+  businessType       String?   
   
   // Performance metrics
   totalSales        Float     @default(0)
@@ -109,7 +110,8 @@ model FarmerProfile {
   
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
-  
+  crops             String?
+
   // Relationships
   products          Product[]
   orders            Order[]
@@ -127,6 +129,9 @@ model BuyerProfile {
   dateOfBirth       DateTime?
   gender            String?
   occupation        String?
+
+  address           String?
+  businessType       String?
   
   // Preferences
   dietaryPreferences String[] 
@@ -145,6 +150,7 @@ model BuyerProfile {
   
   createdAt         DateTime  @default(now())
   updatedAt         DateTime  @updatedAt
+
   
   // Relationships
   customerRelations CustomerRelation[]

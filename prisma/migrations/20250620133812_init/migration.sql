@@ -89,6 +89,7 @@ CREATE TABLE "farmer_profiles" (
     "businessLicense" TEXT,
     "taxId" TEXT,
     "bankAccount" TEXT,
+    "businessType" TEXT,
     "totalSales" DOUBLE PRECISION NOT NULL DEFAULT 0,
     "totalOrders" INTEGER NOT NULL DEFAULT 0,
     "averageRating" DOUBLE PRECISION NOT NULL DEFAULT 0,
@@ -97,6 +98,7 @@ CREATE TABLE "farmer_profiles" (
     "isActive" BOOLEAN NOT NULL DEFAULT true,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
+    "crops" TEXT,
 
     CONSTRAINT "farmer_profiles_pkey" PRIMARY KEY ("id")
 );
@@ -108,6 +110,8 @@ CREATE TABLE "buyer_profiles" (
     "dateOfBirth" TIMESTAMP(3),
     "gender" TEXT,
     "occupation" TEXT,
+    "address" TEXT,
+    "businessType" TEXT,
     "dietaryPreferences" TEXT[],
     "allergies" TEXT[],
     "preferredCategories" TEXT[],
