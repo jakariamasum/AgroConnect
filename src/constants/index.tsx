@@ -18,10 +18,9 @@ import {
   ShoppingCart,
   BarChart3,
   Users,
-  FileText,
   Settings,
   Truck,
-  PlusCircle,
+  Users2,
 } from "lucide-react";
 
 export const stats = [
@@ -557,17 +556,18 @@ export const farmerSidebar = [
     label: "Dashboard",
   },
   {
-    name: "products",
-    href: "/farmers/products",
+    name: "inventory",
+    href: "/farmers/inventory",
     icon: Package,
-    label: "My Products",
+    label: "Inventory",
   },
   {
-    name: "add-product",
-    href: "/farmers/products/new",
-    icon: PlusCircle,
-    label: "Add Product",
+    name: "customers",
+    href: "/farmers/customers",
+    icon: Users2,
+    label: "Customers",
   },
+
   {
     name: "orders",
     href: "/farmers/orders",
@@ -593,30 +593,12 @@ export const farmerSidebar = [
     label: "Messages",
   },
   {
-    name: "market",
-    href: "/farmers/market",
+    name: "marketplace",
+    href: "/farmers/marketplace",
     icon: Leaf,
     label: "Marketplace",
   },
-  {
-    name: "reports",
-    icon: FileText,
-    label: "Reports",
-    children: [
-      {
-        name: "sales",
-        href: "/farmers/reports/sales",
-        icon: FileText,
-        label: "Sales Report",
-      },
-      {
-        name: "inventory",
-        href: "/farmers/reports/inventory",
-        icon: FileText,
-        label: "Inventory Report",
-      },
-    ],
-  },
+
   {
     name: "profile",
     href: "/farmers/profile",
@@ -630,3 +612,86 @@ export const farmerSidebar = [
     label: "Settings",
   },
 ];
+
+export const timeRangeOptions = [
+    { value: "7d", label: "Last 7 days" },
+    { value: "30d", label: "Last 30 days" },
+    { value: "90d", label: "Last 3 months" },
+    { value: "1y", label: "Last year" },
+  ];
+
+  export const metricOptions = [
+    { value: "revenue", label: "Revenue" },
+    { value: "orders", label: "Orders" },
+    { value: "customers", label: "Customers" },
+    { value: "products", label: "Products Sold" },
+  ];
+
+  export const revenueData = [
+    { date: "2024-01-01", revenue: 12000, orders: 45, customers: 32 },
+    { date: "2024-01-02", revenue: 15000, orders: 52, customers: 38 },
+    { date: "2024-01-03", revenue: 18000, orders: 61, customers: 45 },
+    { date: "2024-01-04", revenue: 14000, orders: 48, customers: 35 },
+    { date: "2024-01-05", revenue: 22000, orders: 67, customers: 52 },
+    { date: "2024-01-06", revenue: 25000, orders: 73, customers: 58 },
+    { date: "2024-01-07", revenue: 28000, orders: 81, customers: 64 },
+  ];
+
+  export const productPerformance = [
+    { name: "Tomatoes", sales: 45000, orders: 156, growth: 12.5 },
+    { name: "Potatoes", sales: 38000, orders: 134, growth: 8.3 },
+    { name: "Chilies", sales: 22000, orders: 89, growth: -2.1 },
+    { name: "Onions", sales: 31000, orders: 112, growth: 15.7 },
+    { name: "Carrots", sales: 18000, orders: 67, growth: 5.2 },
+  ];
+
+  export const customerSegments = [
+    { name: "Restaurants", value: 45, color: "#10B981" },
+    { name: "Retailers", value: 30, color: "#3B82F6" },
+    { name: "Individual", value: 20, color: "#F59E0B" },
+    { name: "Wholesalers", value: 5, color: "#8B5CF6" },
+  ];
+
+  export const monthlyComparison = [
+    { month: "Jan", thisYear: 85000, lastYear: 72000 },
+    { month: "Feb", thisYear: 92000, lastYear: 78000 },
+    { month: "Mar", thisYear: 98000, lastYear: 85000 },
+    { month: "Apr", thisYear: 105000, lastYear: 89000 },
+    { month: "May", thisYear: 112000, lastYear: 95000 },
+    { month: "Jun", thisYear: 125000, lastYear: 108000 },
+  ];
+
+  export const kpiData = [
+    {
+      title: "Total Revenue",
+      value: "৳1,25,000",
+      change: "+15.3%",
+      changeType: "positive",
+      icon: <DollarSign className="w-6 h-6" />,
+      color: "text-green-600",
+    },
+    {
+      title: "Orders Completed",
+      value: "342",
+      change: "+8.7%",
+      changeType: "positive",
+      icon: <Package className="w-6 h-6" />,
+      color: "text-blue-600",
+    },
+    {
+      title: "Active Customers",
+      value: "156",
+      change: "+12.1%",
+      changeType: "positive",
+      icon: <Users className="w-6 h-6" />,
+      color: "text-purple-600",
+    },
+    {
+      title: "Average Rating",
+      value: "4.8",
+      change: "+0.2",
+      changeType: "positive",
+      icon: <Star className="w-6 h-6" />,
+      color: "text-yellow-600",
+    },
+  ];
