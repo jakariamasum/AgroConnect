@@ -24,6 +24,14 @@ import AgroForm from "@/components/form/agro-form";
 import AgroInput from "@/components/form/agro-input";
 import AgroSelect from "@/components/form/agro-select";
 import Label from "@/components/ui/label";
+import { useGetCategoriesQuery } from "@/redux/features/categories/categoriesApi";
+import AgroTextarea from "@/components/form/agro-textarea";
+import { Category } from "@/generated/prisma";
+import AgroTagInput from "@/components/form/agro-tag-input";
+import AgroImageUploader from "@/components/form/ago-image-upload";
+import AgroCheckbox from "@/components/form/agro-checkbox";
+import { useCreateProductMutation } from "@/redux/features/products/productApi";
+import { addProduct } from "@/redux/features/products/productsSlice";
 
 interface InventoryItem {
   id: number;
@@ -44,6 +52,7 @@ interface InventoryItem {
 }
 
 const FarmerInventory = () => {
+  const [create] = useCreateProductMutation();
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedStatus, setSelectedStatus] = useState("all");
@@ -51,6 +60,8 @@ const FarmerInventory = () => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState<InventoryItem | null>(null);
   const [viewMode, setViewMode] = useState<"grid" | "table">("table");
+  const { data: response } = useGetCategoriesQuery({});
+  const categories = response?.data?.data || [];
 
   const [inventory, setInventory] = useState<InventoryItem[]>([
     {
@@ -70,15 +81,6 @@ const FarmerInventory = () => {
       supplier: "Own Production",
     },
   ]);
-
-  const categories = [
-    { value: "all", label: "All Categories" },
-    { value: "vegetables", label: "Vegetables" },
-    { value: "fruits", label: "Fruits" },
-    { value: "grains", label: "Grains" },
-    { value: "supplies", label: "Supplies" },
-    { value: "equipment", label: "Equipment" },
-  ];
 
   const statusOptions = [
     { value: "all", label: "All Status" },
@@ -114,6 +116,11 @@ const FarmerInventory = () => {
         return null;
     }
   };
+
+  const categoryOptions = categories?.map((cat: Category) => ({
+    label: cat.name,
+    value: cat.id,
+  }));
 
   const filteredInventory = inventory.filter((item) => {
     const matchesSearch =
@@ -151,6 +158,19 @@ const FarmerInventory = () => {
   const handleDeleteItem = (id: number) => {
     setInventory((prev) => prev.filter((item) => item.id !== id));
     toast.success("Item deleted successfully");
+  };
+  const onSubmitAddItem = async (data: any) => {
+    data.farmerId = "cmc52ichm00019wactecxtb4k"; // Replace with actual farmer ID
+    console.log("Add Item Data:", data);
+
+    const res = await create(data).unwrap();
+    console.log("Create Product Response:", res);
+    if (res.success) {
+      toast.success("Product added successfully");
+      addProduct(res.data);
+    } else {
+      toast.error("Failed to add product");
+    }
   };
 
   return (
@@ -279,7 +299,7 @@ const FarmerInventory = () => {
                   </div>
 
                   <div className="flex gap-3">
-                    <AgroSelect name="category" options={categories} />
+                    <AgroSelect name="category" options={categoryOptions} />
                     <AgroSelect name="status" options={statusOptions} />
 
                     <div className="flex border border-gray-300 rounded-lg overflow-hidden">
@@ -557,72 +577,130 @@ const FarmerInventory = () => {
         title="Add New Inventory Item"
         size="lg"
       >
-        <AgroForm onSubmit={() => {}}>
-          <div className="p-6">
-            <div className="grid grid-cols-2 gap-4 mb-4">
+        <AgroForm onSubmit={onSubmitAddItem}>
+          <div className="p-6 space-y-6">
+            {/* Basic Info */}
+            <div className="grid grid-cols-2 gap-4">
               <AgroInput
-                name="itemName"
-                label="Item Name"
-                placeholder="Enter item name"
+                name="name"
+                label="Product Name"
+                placeholder="Enter product name"
               />
+              <AgroInput name="slug" label="Slug" placeholder="Enter slug" />
               <div>
                 <Label label="Category" />
                 <AgroSelect
-                  name="category"
-                  options={categories}
+                  name="categoryId"
+                  options={categoryOptions}
                   placeholder="Select category"
                 />
               </div>
-            </div>
-            <div className="grid grid-cols-3 gap-4 mb-4">
               <AgroInput
-                name="currentStock"
+                name="unit"
+                label="Unit"
+                placeholder="kg, pieces, etc."
+                required={false}
+              />
+            </div>
+
+            {/* Inventory */}
+            <div className="grid grid-cols-3 gap-4">
+              <AgroInput
+                name="price"
+                label="Price"
+                type="number"
+                placeholder="0"
+              />
+              <AgroInput
+                name="stock"
                 label="Current Stock"
                 type="number"
                 placeholder="0"
               />
               <AgroInput
-                name="unit"
-                label="Unit"
-                placeholder="kg, pieces, etc."
-              />
-              <AgroInput
-                name="pricePerUnit"
-                label="Price per Unit"
-                type="number"
-                placeholder="0"
-              />
-            </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-4">
-              <AgroInput
-                name="minThreshold"
+                name="minStock"
                 label="Minimum Threshold"
                 type="number"
                 placeholder="0"
               />
-              <AgroInput
-                name="maxCapacity"
-                label="Maximum Capacity"
-                type="number"
-                placeholder="0"
-              />
             </div>
 
-            <div className="grid grid-cols-2 gap-4 mb-6">
-              <AgroInput
-                name="location"
-                label="Location"
-                placeholder="Storage location"
-              />
-              <AgroInput name="expiryDate" label="Expiry Date" type="date" />
+            {/* Tags and Media */}
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <Label label="Tags" />
+                <AgroTagInput
+                  name="tags"
+                  placeholder="Hit enter or comma to add tags"
+                />
+              </div>
+              <div>
+                <Label label="Certifications" />
+                <AgroTagInput
+                  name="certifications"
+                  placeholder="Hit enter or comma to add certifications"
+                />
+              </div>
             </div>
 
-            <div className="flex justify-end space-x-3">
+            {/* Certifications */}
+            <div className="">
+              <div>
+                <Label label="Images" />
+                <AgroImageUploader name="images" />
+              </div>
+            </div>
+            {/* Descriptions */}
+            <div className="grid grid-cols-1 gap-4">
+              <div>
+                <Label label="Short Description" required={false} />
+                <AgroTextarea name="shortDescription" />
+              </div>
+              <div>
+                <Label label="Full Description" required={false} />
+                <AgroTextarea name="description" />
+              </div>
+            </div>
+
+            {/* SEO (Optional) */}
+            <div className="grid grid-cols-2 gap-4">
+              <AgroInput
+                name="metaTitle"
+                label="Meta Title"
+                placeholder="SEO title"
+                required={false}
+              />
+              <div>
+                <Label label="Meta Description" required={false} />
+                <AgroTextarea name="metaDescription" />
+              </div>
+            </div>
+
+            {/* Status & Feature */}
+            <div className="flex flex-col space-y-2">
+              <AgroSelect
+                name="status"
+                options={[
+                  { label: "ACTIVE", value: "ACTIVE" },
+                  { label: "INACTIVE", value: "INACTIVE" },
+                ]}
+                placeholder="Select status"
+              />
+
+              <AgroCheckbox name="isFeatured" required={false}>
+                Featured Product
+              </AgroCheckbox>
+              <AgroCheckbox name="isOrganic" required={false}>
+                Organic Product
+              </AgroCheckbox>
+            </div>
+
+            {/* Actions */}
+            <div className="flex justify-end space-x-3 pt-4">
               <Button variant="outline" onClick={() => setShowAddModal(false)}>
                 Cancel
               </Button>
-              <Button onClick={() => setShowAddModal(false)}>Add Item</Button>
+              <Button type="submit">Add Product</Button>
             </div>
           </div>
         </AgroForm>
@@ -643,10 +721,7 @@ const FarmerInventory = () => {
                   <AgroInput name="itemName" label="Item Name" />
                   <div>
                     <Label label="Category" />
-                    <AgroSelect
-                      name="category"
-                      options={categories.filter((c) => c.value !== "all")}
-                    />
+                    <AgroSelect name="category" options={categoryOptions} />
                   </div>
                 </div>
 

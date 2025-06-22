@@ -5,6 +5,7 @@ import { uploadApi } from "./features/upload/uploadApi";
 import uploadSlice from "./features/upload/uploadSlice";
 import { categoriesApi } from "./features/categories/categoriesApi";
 import categoriesSlice from "./features/categories/categoriesSlice";
+import { productsApi } from "./features/products/productApi";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
     [uploadApi.reducerPath]: uploadApi.reducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
+    [productsApi.reducerPath]: productsApi.reducer,
 
     // other reducers here if needed
     auth: authSlice,
@@ -22,7 +24,8 @@ export const store = configureStore({
     getDefaultMiddleware()
       .concat(authApi.middleware)
       .concat(uploadApi.middleware)
-      .concat(categoriesApi.middleware),
+      .concat(categoriesApi.middleware)
+      .concat(productsApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;
